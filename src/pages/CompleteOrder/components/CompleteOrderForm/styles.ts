@@ -14,7 +14,7 @@ export const FormSectionContainer = styled(SectionBaseStyle)`
   gap: 2rem;
 `
 
-export const AddressFormContainer = styled.div`
+export const FormContainer = styled.div`
   width: 100%;
 
   .row {
@@ -29,7 +29,7 @@ export const AddressFormContainer = styled.div`
       margin-top: 1rem;
     }
 
-    .cep {
+    .zipCode {
       max-width: 9rem;
     }
     .complement {
@@ -46,7 +46,7 @@ export const AddressFormContainer = styled.div`
     .row {
       flex-direction: column;
     }
-    .cep {
+    .zipCode {
       max-width: 100% !important;
     }
   }

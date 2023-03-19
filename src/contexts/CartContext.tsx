@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
-import { Coffee } from '../components/CoffeeCard'
 import { produce } from 'immer'
+import { Product } from '../interfaces/Product'
 
-export interface CartItem extends Coffee {
+export interface CartItem extends Product {
   quantity: number
 }
 
@@ -10,7 +10,9 @@ interface CartContextType {
   cartItems: CartItem[]
   cartQuantity: number
   cartItemsTotal: number
-  addCoffeeToCart: (coffee: CartItem) => void
+  cartItemTotalFinal: number
+
+  addProductToCart: (product: CartItem) => void
   changeCartItemQuantity: (
     cartItemId: number,
     type: 'increase' | 'decrease',
@@ -23,13 +25,13 @@ interface CartContextProviderProps {
   children: ReactNode
 }
 
-const COFFEE_ITEMS_STORAGE_KEY = 'CoffeeDelivery:cartItems'
+const PRODUCTS_ITEMS_STORAGE_KEY = 'ProductsDelivery:cartItems'
 
 export const CartContext = createContext({} as CartContextType)
 
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [cartItems, setCartItems] = useState<CartItem[]>(() => {
-    const storedCartItems = localStorage.getItem(COFFEE_ITEMS_STORAGE_KEY)
+    const storedCartItems = localStorage.getItem(PRODUCTS_ITEMS_STORAGE_KEY)
 
     if (storedCartItems) {
       return JSON.parse(storedCartItems)
@@ -43,16 +45,24 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     return total + cartItem.price * cartItem.quantity
   }, 0)
 
-  function addCoffeeToCart(coffee: CartItem) {
-    const coffeeAlreadyExistsInCart = cartItems.findIndex(
-      (cartItem) => cartItem.id === coffee.id,
+  const cartItemTotalFinal = cartItems.reduce((total, cartItem) => {
+    let discount = 0;
+    if(cartItem.hasDiscount){
+      discount = cartItem.price * cartItem.quantity * parseFloat(cartItem.discount);
+    }
+    return total + (cartItem.price * cartItem.quantity) - discount;
+  }, 0);
+
+  function addProductToCart(product: CartItem) {
+    const productAlreadyExistsInCart = cartItems.findIndex(
+      (cartItem) => cartItem.external_id === product.external_id,
     )
 
     const newCart = produce(cartItems, (draft) => {
-      if (coffeeAlreadyExistsInCart < 0) {
-        draft.push(coffee)
+      if (productAlreadyExistsInCart < 0) {
+        draft.push(product)
       } else {
-        draft[coffeeAlreadyExistsInCart].quantity += coffee.quantity
+        draft[productAlreadyExistsInCart].quantity += product.quantity
       }
     })
 
@@ -64,12 +74,12 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     type: 'increase' | 'decrease',
   ) {
     const newCart = produce(cartItems, (draft) => {
-      const coffeeExistsInCart = cartItems.findIndex(
-        (cartItem) => cartItem.id === cartItemId,
+      const productExistsInCart = cartItems.findIndex(
+        (cartItem) => cartItem.external_id === cartItemId,
       )
 
-      if (coffeeExistsInCart >= 0) {
-        const item = draft[coffeeExistsInCart]
+      if (productExistsInCart >= 0) {
+        const item = draft[productExistsInCart]
         item.quantity =
           type === 'increase' ? item.quantity + 1 : item.quantity - 1
       }
@@ -80,12 +90,12 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
 
   function removeCartItem(cartItemId: number) {
     const newCart = produce(cartItems, (draft) => {
-      const coffeeExistsInCart = cartItems.findIndex(
-        (cartItem) => cartItem.id === cartItemId,
+      const productExistsInCart = cartItems.findIndex(
+        (cartItem) => cartItem.external_id === cartItemId,
       )
 
-      if (coffeeExistsInCart >= 0) {
-        draft.splice(coffeeExistsInCart, 1)
+      if (productExistsInCart >= 0) {
+        draft.splice(productExistsInCart, 1)
       }
     })
 
@@ -97,16 +107,17 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
   }
 
   useEffect(() => {
-    localStorage.setItem(COFFEE_ITEMS_STORAGE_KEY, JSON.stringify(cartItems))
+    localStorage.setItem(PRODUCTS_ITEMS_STORAGE_KEY, JSON.stringify(cartItems))
   }, [cartItems])
 
   return (
     <CartContext.Provider
       value={{
         cartItems,
-        addCoffeeToCart,
+        addProductToCart,
         cartQuantity,
         cartItemsTotal,
+        cartItemTotalFinal,
         changeCartItemQuantity,
         removeCartItem,
         cleanCart,

@@ -7,34 +7,33 @@ import { ConfirmationSectionContainer } from './styles'
 const DELIVERY_PRICE = 3.5
 
 export function ConfirmationSection() {
-  const { cartItemsTotal, cartQuantity } = useCart()
-  const cartTotal = DELIVERY_PRICE + cartItemsTotal
+  const { cartItemsTotal, cartQuantity, cartItemTotalFinal } = useCart()
 
   const formattedItemsTotal = formatMoney(cartItemsTotal)
-  const formattedDeliveryPrice = formatMoney(DELIVERY_PRICE)
-  const formattedCartTotal = formatMoney(cartTotal)
+  const formattedCartTotalFinal = formatMoney(cartItemTotalFinal)
+  const formattedDiscount = formatMoney(cartItemsTotal - cartItemTotalFinal)
 
   return (
     <ConfirmationSectionContainer>
       <div>
-        <RegularText size="s">Total de itens</RegularText>
-        <RegularText size="s">R$ {formattedItemsTotal}</RegularText>
+        <RegularText size="s">Total</RegularText>
+        <RegularText size="s">{formattedItemsTotal}</RegularText>
       </div>
       <div>
-        <RegularText size="s">Entrega</RegularText>
-        <RegularText size="s">R$ {formattedDeliveryPrice}</RegularText>
+        <RegularText size="s">Discount</RegularText>
+        <RegularText size="s">{formattedDiscount}</RegularText>
       </div>
       <div>
         <RegularText weight="700" color="subtitle" size="l">
           Total
         </RegularText>
         <RegularText weight="700" color="subtitle" size="l">
-          R$ {formattedCartTotal}
+          {formattedCartTotalFinal}
         </RegularText>
       </div>
 
       <Button
-        text="Confirmar pedido"
+        text="Confirm order"
         disabled={cartQuantity <= 0}
         type="submit"
       />

@@ -1,7 +1,7 @@
+import { TitleText, RegularText } from './../../Typography';
 import styled from 'styled-components'
-import { TitleText, RegularText } from '../Typography'
 
-export const CoffeeCardContainer = styled.div`
+export const ProductCardContainer = styled.div`
   width: 100%;
   background: ${({ theme }) => theme.colors['base-card']};
   border-radius: 6px 36px 6px 36px;
@@ -19,6 +19,20 @@ export const CoffeeCardContainer = styled.div`
     margin-top: -5rem;
   }
 `
+
+export const DetailsButton = styled.button`
+  width: 100%;
+  height: 2.375rem;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${({ theme }) => theme.colors['brand-purple-dark']};
+  color: ${({ theme }) => theme.colors['base-card']};
+  border-radius: 6px;
+  margin-top: 1rem;
+  transition: 0.4s;
+  `
 
 export const Tags = styled.div`
   width: 100%;

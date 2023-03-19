@@ -3,59 +3,53 @@ import {
   HeroContent,
   HeroTitle,
   BenefitsContainer,
-} from './styles'
+} from "./styles";
 
-import heroImage from '../../../../assets/hero-image.png'
-import { RegularText } from '../../../../components/Typography'
-import { InfoWithIcon } from '../../../../components/InfoWithIcon'
-import { ShoppingCart, Package, Timer, Coffee } from 'phosphor-react'
-import { useTheme } from 'styled-components'
+import heroImage from "../../../../assets/hero-image.png";
+import imageEcommerce from '../../../../assets/img_eco.png';
+import { RegularText } from "../../../../components/Typography";
+import { InfoWithIcon } from "../../../../components/InfoWithIcon";
+import { ShoppingCart, Package, Timer} from "phosphor-react";
+import { useTheme } from "styled-components";
 
 export function Hero() {
-  const { colors } = useTheme()
+  const { colors } = useTheme();
 
   return (
     <HeroContainer>
       <HeroContent className="container">
         <div>
           <section>
-            <HeroTitle size="xl">
-              Encontre o café perfeito para qualquer hora do dia
-            </HeroTitle>
+            <HeroTitle size="xl">Find your product</HeroTitle>
             <RegularText size="l" color="subtitle" as="h3">
-              Com o Coffe Delivery você recebe seu café onde estiver, a qualquer
-              hora
+              Receive your product wherever you are, anytime.
             </RegularText>
           </section>
 
           <BenefitsContainer>
             <InfoWithIcon
-              iconColor={colors['brand-yellow-dark']}
+              iconColor={colors["brand-yellow-dark"]}
               icon={<ShoppingCart weight="fill" />}
-              text="Compra simples e segura"
+              text="Simple and secure purchase"
             />
             <InfoWithIcon
-              iconColor={colors['base-text']}
+              iconColor={colors["base-text"]}
               icon={<Package weight="fill" />}
-              text="Embalagem mantém o café intacto"
+              text="Packaging keeps the product intact"
             />
             <InfoWithIcon
-              iconColor={colors['brand-yellow']}
+              iconColor={colors["brand-yellow"]}
               icon={<Timer weight="fill" />}
-              text="Entrega rápida e rastreada"
-            />
-            <InfoWithIcon
-              iconColor={colors['brand-purple']}
-              icon={<Coffee weight="fill" />}
-              text="O café chega fresquinho até você"
+              text="Fast and tracked delivery."
             />
           </BenefitsContainer>
         </div>
 
         <div className="imageContainer">
-          <img src={heroImage} alt="" />
+          <img src={imageEcommerce} alt="" />
         </div>
       </HeroContent>
     </HeroContainer>
-  )
+  );
 }
+ 

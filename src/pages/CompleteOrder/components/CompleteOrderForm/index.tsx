@@ -1,9 +1,9 @@
-import { MapPinLine, CurrencyDollar } from 'phosphor-react'
+import { MapPinLine, CurrencyDollar, User } from 'phosphor-react'
 import { useTheme } from 'styled-components'
 import { TitleText } from '../../../../components/Typography'
 import { SectionTitle } from '../SectionTitle'
 import { AddressForm } from './AddressForm'
-import { PaymentMethodOptions } from './PaymentMethodOptions'
+import { CustomerForm } from './CustomerForm'
 import { CompleteOrderFormContainer, FormSectionContainer } from './styles'
 
 export function CompleteOrderForm() {
@@ -12,27 +12,27 @@ export function CompleteOrderForm() {
   return (
     <CompleteOrderFormContainer>
       <TitleText size="xs" color="subtitle">
-        Complete seu pedido
+        Complete your order
       </TitleText>
 
       <FormSectionContainer>
+      <SectionTitle
+          title="Customer details"
+          subtitle="please enter the customer details"
+          icon={<User color={colors['brand-yellow-dark']} size={22} />}
+        />
+
+        <CustomerForm />
+        
         <SectionTitle
-          title="Endereço de Entrega"
-          subtitle="Informe o endereço onde deseja receber seu pedido"
+          title="Shipping address"
+          subtitle="please enter the shipping address"
           icon={<MapPinLine color={colors['brand-yellow-dark']} size={22} />}
         />
 
         <AddressForm />
-      </FormSectionContainer>
 
-      <FormSectionContainer>
-        <SectionTitle
-          title="Pagamento"
-          subtitle="O pagamento é feito na entrega. Escolha a forma que deseja pagar"
-          icon={<CurrencyDollar color={colors['brand-purple']} size={22} />}
-        />
-
-        <PaymentMethodOptions />
+      
       </FormSectionContainer>
     </CompleteOrderFormContainer>
   )

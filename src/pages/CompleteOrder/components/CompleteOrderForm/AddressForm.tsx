@@ -1,4 +1,4 @@
-import { AddressFormContainer } from './styles'
+import { FormContainer } from './styles'
 import { useFormContext } from 'react-hook-form'
 import { Input } from '../../../../components/Input'
 
@@ -16,19 +16,19 @@ export function AddressForm() {
   const { errors } = formState as unknown as ErrorsType
 
   return (
-    <AddressFormContainer>
+    <FormContainer>
       <div className="row">
         <Input
-          placeholder="CEP"
+          placeholder="Zip Code"
           type="number"
-          className="cep"
-          {...register('cep')}
-          error={errors.cep?.message}
+          className="zipCode"
+          {...register('zipCode')}
+          error={errors.zipCode?.message}
         />
       </div>
       <div className="row">
         <Input
-          placeholder="Rua"
+          placeholder="Street"
           className="street"
           {...register('street')}
           error={errors.street?.message}
@@ -37,37 +37,37 @@ export function AddressForm() {
       <div className="row">
         <Input
           type="number"
-          placeholder="Número"
+          placeholder="Number"
           {...register('number')}
           error={errors.number?.message}
         />
         <Input
-          placeholder="Complemento"
+          placeholder="Complement"
           className="complement"
           {...register('complement')}
           error={errors.complement?.message}
-          rightText="Opcional"
+          rightText="Optional"
         />
       </div>
       <div className="row">
         <Input
-          placeholder="Bairro"
+          placeholder="District"
           {...register('district')}
           error={errors.district?.message}
         />
         <Input
-          placeholder="Cidade"
+          placeholder="City"
           className="city"
           {...register('city')}
           error={errors.city?.message}
         />
         <Input
-          placeholder="UF"
+          placeholder="State"
           className="uf"
           {...register('uf')}
           error={errors.uf?.message}
         />
       </div>
-    </AddressFormContainer>
+    </FormContainer>
   )
 }

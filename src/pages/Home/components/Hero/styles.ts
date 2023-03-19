@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 import heroBackgroundImage from '../../../../assets/hero-background.png'
+
 import { TitleText } from '../../../../components/Typography'
 
 export const HeroContainer = styled.section`

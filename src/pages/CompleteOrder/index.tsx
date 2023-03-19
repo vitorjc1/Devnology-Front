@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { CompleteOrderForm } from './components/CompleteOrderForm'
-import { SelectedCoffees } from './components/SelectedCoffees'
 import { CompleteOrderContainer } from './styles'
 import { useForm, FormProvider } from 'react-hook-form'
 import * as zod from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
+import { axiosInstance } from '../../utils/axiosInstance'
+import { SelectedProducts } from './components/SelectedProducts'
 
 enum PaymentMethods {
   credit = 'credit',
@@ -15,16 +16,19 @@ enum PaymentMethods {
 }
 
 const confirmOrderFormValidationSchema = zod.object({
-  cep: zod.string().min(1, 'Informe o CEP'),
-  street: zod.string().min(1, 'Informe o Rua'),
-  number: zod.string().min(1, 'Informe o Número'),
+  zipCode: zod.string().min(1, 'Zip code is required'),
+  street: zod.string().min(1, 'Street is required'),
+  number: zod.string().min(1, 'Number is required'),
   complement: zod.string(),
-  district: zod.string().min(1, 'Informe o Bairro'),
-  city: zod.string().min(1, 'Informe a Cidade'),
-  uf: zod.string().min(1, 'Informe a UF'),
+  district: zod.string().min(1, 'District is required'),
+  city: zod.string().min(1, 'City is required'),
+  uf: zod.string().min(1, 'State is required'),
+  name: zod.string().min(1, 'Name is required'),
+  document: zod.string().min(1, 'Document is required'),
+  birth: zod.string().min(1, 'Birth is required'),
   paymentMethod: zod.nativeEnum(PaymentMethods, {
     errorMap: () => {
-      return { message: 'Informe o método de pagamento' }
+      return { message: 'Payment method is required' }
     },
   }),
 })
@@ -44,9 +48,30 @@ export function CompleteOrderPage() {
   const { handleSubmit } = confirmOrderForm
 
   const navigate = useNavigate()
-  const { cleanCart } = useCart()
+  const { cleanCart, cartItems } = useCart()
 
-  function handleConfirmOrder(data: ConfirmOrderFormData) {
+  async function handleConfirmOrder(data: ConfirmOrderFormData) {
+    const dataRequest = {
+      items: cartItems,
+      customer: {
+        name: data.name,
+        document: data.document,
+        birth: data.birth,
+      },
+      address: {
+        zip_code: data.zipCode,
+        street: data.street,
+        number: data.number,
+        complement: data.complement,
+        district: data.district,
+        city: data.city,
+        uf: data.uf,
+      },
+      payment_method: data.paymentMethod,
+    }
+    await axiosInstance.post('/order',dataRequest).then((response) => {
+      console.log(response);
+    })
     navigate('/orderConfirmed', {
       state: data,
     })
@@ -60,7 +85,7 @@ export function CompleteOrderPage() {
         onSubmit={handleSubmit(handleConfirmOrder)}
       >
         <CompleteOrderForm />
-        <SelectedCoffees />
+        <SelectedProducts />
       </CompleteOrderContainer>
     </FormProvider>
   )

@@ -1,4 +1,4 @@
-import { OurCoffees } from '../../components/OurCoffees'
+import { ProductsList } from '../../components/Product/ProductsList'
 import { Hero } from './components/Hero'
 import { HomeContainer } from './styles'
 
@@ -7,7 +7,7 @@ export function Home() {
     <HomeContainer>
       <Hero />
 
-      <OurCoffees />
+      <ProductsList />
     </HomeContainer>
   )
 }

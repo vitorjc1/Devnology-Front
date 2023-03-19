@@ -1,8 +1,8 @@
 import { HeaderButton, HeaderButtonsContainer, HeaderContainer } from './styles'
 
-import { MapPin, ShoppingCart } from 'phosphor-react'
+import { ShoppingCart } from 'phosphor-react'
 
-import coffeLogoImage from '../../assets/coffe-delivery-logo.svg'
+import in8Logo from '../../assets/logo_in8.png';
 import { NavLink } from 'react-router-dom'
 import { useCart } from '../../hooks/useCart'
 
@@ -13,14 +13,10 @@ export function Header() {
     <HeaderContainer>
       <div className="container">
         <NavLink to="/">
-          <img src={coffeLogoImage} alt="" />
+          <img src={in8Logo} alt="" style={{maxWidth: '60px'}} />
         </NavLink>
 
         <HeaderButtonsContainer>
-          <HeaderButton variant="purple">
-            <MapPin size={20} weight="fill" />
-            Fortaleza, CE
-          </HeaderButton>
           <NavLink to="/completeOrder">
             <HeaderButton variant="yellow">
               {cartQuantity >= 1 && <span>{cartQuantity}</span>}

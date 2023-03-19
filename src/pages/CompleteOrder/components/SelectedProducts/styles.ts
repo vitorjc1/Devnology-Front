@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { SectionBaseStyle } from '../../styles'
 
-export const SelectedCoffeesContainer = styled.div`
+export const SelectedProductsContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.75rem;

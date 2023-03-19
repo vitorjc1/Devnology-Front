@@ -1,36 +1,32 @@
 <h1 align="center">
-  Coffee Delivery
+  Delivery
 </h1>
 
 <p align="center">
-  <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-technologies">Technologies</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#-how-to-use">How to Use</a>
+  <a href="#-project">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-technologies">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-how-to-use">Como executar</a>
 </p>
 
 <p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/kaikySantos/coffe-delivery">
+  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/vitorjc1/Devnology-Front">
 
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/kaikySantos/coffe-delivery">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/vitorjc1/Devnology-Front">
 
-  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/kaikySantos/coffe-delivery">
+  <img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/vitorjc1/Devnology-Front">
 
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/kaikySantos/coffe-delivery">
-</p>
-
-<p align="center">
-  <img alt="coffe-delivery" src="https://user-images.githubusercontent.com/56506919/219960287-d0612632-6063-4624-8592-6c79acfa1701.png">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/vitorjc1/Devnology-Front">
 </p>
 
 <br/>
 
-## 💻 Project
+## 💻 Projeto
 
-This is a project made entirely in React for an e-commerce coffee sales site to improve concepts such as Context API, Router, form validation through react-hook-form, and zod and styled components for styling.
+Este é um projeto de ecommerce - delivery, no qual o cliente pode selecionar os produtos, pesquisando-os, e comprando. Os produtos serão encaminhados para um carrinho de compra para o cliente visualiza-los, verificando a existência de descontos. Após esta etapa, será necessário o preenchimento dos campos referentes a dados cadastrais do cliente, endereço de entrega e forma de pagamento, que será feito no momento da entrega.
 
-## 🚀 Technologies
+## 🚀 Tecnologias
 
-This project was developed with the following technologies:
+Este projeto foi desenvolvido com as seguintes tecnologias:
 
 - [React](https://reactjs.org)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -39,27 +35,23 @@ This project was developed with the following technologies:
 - [ReactHookForm](https://react-hook-form.com/)
 - [ReactRouterDom](https://reactrouter.com/)
 
-## ℹ️ How To Use
+## ℹ️ Como usar
 
-To clone and run this application, you'll need [Git](https://git-scm.com) and [Yarn](https://legacy.yarnpkg.com). From your command line:
-
+para clonar e executar esta aplicação, você irá precisar [Git](https://git-scm.com) e do [NPM](https://nodejs.org/en). Da sua linha de comando:
 ```bash
-# Clone the repository
-$ git clone https://github.com/kaikySantos/coffe-delivery.git
 
-# Go into the directory
-$ cd coffe-delivery
+#Clonar o repositório
+$ git clone https://github.com/vitorjc1/Devnology-Front.git
 
-# Install dependencies
-$ yarn
+# Ir para a pasta
+$ cd delivery
 
-# Run the development server
-$ yarn dev
+# Instalar dependências
+$ npm i
 
-# Navigate to http://localhost:3000
-# The app will automatically reload if you change any of the source files.
+# Executar em modo de desenvolvimento
+$ npm run dev
 ```
-
 ---
 
-Made with ♥ by Kaiky 👋🏻
+Feito com ♥ por Vitor Cordeiro 👋🏻
